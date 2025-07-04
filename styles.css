@@ -809,6 +809,10 @@ display: none;
 .workspace-leaf-content .floating-toc-div.pin.floating-right~.markdown-reading-view .markdown-preview-sizer {
   padding-right: calc(min(var(--floating-toc-line-width), var(--actual-toc-width)) - 2rem);
 }
+/* 修复：排除嵌入的笔记 */
+.workspace-leaf-content .floating-toc-div.pin.floating-right~.markdown-reading-view .markdown-preview-sizer .markdown-embed .markdown-preview-sizer {
+  padding-right: 0 !important;
+}
 
 .floating-toc-div:is(.floating-left, .floating-both)+.markdown-source-view .cm-panels {
   margin-left: -2rem;
