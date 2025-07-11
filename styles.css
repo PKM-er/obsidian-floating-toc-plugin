@@ -114,6 +114,15 @@ settings:
         default-light: '#ffffff8c'
         default-dark: '#202020c4'
     - 
+        id: heading-color-indicator
+        title: heading color next to indicator bar
+        title.zh: 指示条旁边显示标题的背景色
+        type: variable-themed-color
+        format: hex
+        opacity: true
+        default-light: '#ffffff8c'
+        default-dark: '#202020c4'
+    - 
         id: floating-toc-background-color
         title:  toc background color
         title.zh: 目录背景色
@@ -290,7 +299,7 @@ settings:
   --focus-heading: 0.9;
   --floating-toc-line-width: 18rem;
   --actual-toc-width: 18rem;
-
+  --heading-color-indicator:var(--background-secondary);
 
 }
 
@@ -435,11 +444,11 @@ body.enable-heading-nowrap .heading-list-item .text-wrap .text {
   text-overflow: ellipsis;
 }
 body.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)).floating-left .heading-list-item .text-wrap {
-  margin-left: 1.8rem;
+  margin-left: 1.5rem !important;
 
 }
 body.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)).floating-right .heading-list-item .text-wrap {
-  margin-right: 1.5rem;
+  margin-right: 1.8rem;
 }
 .heading-list-item .text-wrap .text:hover {
   color: var(--floating-toc-hover-color);
@@ -527,7 +536,7 @@ body.enable-bold-bar .floating-toc-div.floating-right .heading-list-item .line-w
 }
  
 body.enable-bold-bar.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)).floating-left .heading-list-item .text-wrap .text {
-  margin-left: 1rem;
+  margin-left: 0rem;
 }
 
 
@@ -1101,8 +1110,9 @@ body.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)) .heading-l
   opacity: 1;
   
 }
-body.enable-bar-heading-text .heading-list-item:is(.located, .focus) .text-wrap .text{
- background-color: var(--background-secondary);
+body.enable-bar-heading-text .heading-list-item:is(.located, .focus) .text-wrap{
+ background-color: var(--heading-color-indicator);
+ border-radius: 0.5rem;
 }
 
 body.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)) .heading-list-item:is(.located, .focus) .text-wrap .text {
@@ -1111,6 +1121,12 @@ body.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)) .heading-l
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--text-normal);
+  margin-left: 0;
+
+}
+body.enable-bar-heading-text.theme-dark .floating-toc-div:not(:is(:hover, .pin)) .heading-list-item:is(.located, .focus) .text-wrap .text {
+
+  mix-blend-mode: difference;
 }
 
 body.enable-bar-heading-text .floating-toc-div:not(:is(:hover, .pin)) .heading-list-item:is(.located, .focus) .text-wrap .text::before {
