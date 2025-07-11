@@ -17,6 +17,7 @@ import {
     expandHeading,
     toggleAllHeadings,
 } from "./toggleCollapse";
+import { t } from 'src/translations/helper';
 
 export async function renderHeader(
     plugin: FloatingToc,
@@ -403,6 +404,11 @@ export function creatToc(app: App, plugin: FloatingToc): void {
 
                 genToc(view.contentEl, floatingTocWrapper);
                 plugin.updateTocWidth(floatingTocWrapper as HTMLElement, plugin.headingdata);
+                
+                // 初始化搜索功能
+                if (plugin.search) {
+                    plugin.search.initSearch(floatingTocWrapper);
+                }
  
             } else return;
         }
@@ -422,6 +428,19 @@ export function createToolbar(plugin: FloatingToc, toolbar: HTMLElement, float_t
             if (float_toc_dom.classList.contains("pin"))
                 float_toc_dom.removeClass("pin");
             else float_toc_dom.addClass("pin");
+        });
+
+    // 添加搜索按钮
+    let searchButton = new ButtonComponent(toolbar);
+    searchButton
+        .setIcon("search")
+        .setTooltip(t("Search in TOC "))
+        .setClass("search")
+        .onClick(() => {
+            // 启动搜索功能
+            if (plugin.search) {
+                plugin.search.startSearchFromButton();
+            }
         });
 
     let topBuuton = new ButtonComponent(toolbar);

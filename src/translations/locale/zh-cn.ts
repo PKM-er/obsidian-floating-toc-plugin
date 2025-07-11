@@ -8,6 +8,8 @@ export default {
   'Plugin Settings': '插件设置',
   'Default Pin':'是否默认钉在笔记上',
   'Enable Tooltip':'是否开启标题提示',
+  'Enable Search':'启用搜索功能',
+  'Enable quick search functionality in floating TOC. Press any key when TOC is active to start searching.':'启用浮动目录的快速搜索功能。当目录激活时按任意键开始搜索。',
   'Plugin Style Settings': '插件样式设置',
   'Mobile enabled or not': '是否在移动端启用',
   'Whether to enable the plugin for the mobile client, the default is enabled.':'移动客户端是否启用插件，默认启用。',
@@ -36,5 +38,16 @@ export default {
   'Bold': '粗体',
   'Show heading text next to indicator bar': '在指示条旁边显示标题上下级',
   'When enabled, heading text will be shown next to the indicator bar': '启用后，标题文本将显示在指示条旁边',
-  'More Style Settings': '更多样式设置'
+  'More Style Settings': '更多样式设置',
+  // 搜索功能相关翻译
+  'Search in TOC ': '在目录中搜索 ',
+  'Search in Floating TOC': '在浮动目录中搜索',
+  'Search': '搜索',
+  'Search title... ': '搜索大纲标题... ',
+  'Search results': '搜索结果',
+  'No results found': '未找到结果',
+  'Press Enter to jump to selected title': '按回车键跳转到选中的标题',
+  'Press Escape to cancel search': '按ESC键取消搜索',
+  'Use arrow keys to navigate results': '使用箭头键导航结果',
+  'Close search': '关闭搜索'
 };

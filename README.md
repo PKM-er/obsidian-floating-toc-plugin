@@ -27,6 +27,7 @@ Please Refer: [How to install Obsidian Plugins](https://forum.obsidian.md/t/plug
 4. Support popout multi-window mode
 5. Support synchronized display  of current header and parent header
 6. Turn on more appearance settings. Please install the style setting plugin
+7. Supports title search. Default shortcut key `alt+f` activates.
 
 ### Full Vault showcase
 

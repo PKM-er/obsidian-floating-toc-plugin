@@ -193,6 +193,7 @@ export class FlotingTOCSettingTab extends PluginSettingTab {
           }, 100);
         }));
 
+  
     // 样式设置
     const styleSettings = tabElements["🎨Style Settings"];
     styleSettings.createEl("h2", { text: t("Style Settings") });

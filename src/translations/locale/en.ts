@@ -7,6 +7,8 @@ export default {
     'Plugin Settings':'Plugin Settings',
     'Default Pin':'Default Pin',
     'Enable Tooltip':'Enable Tooltip',
+    'Enable Search':'Enable Search',
+    'Enable quick search functionality in floating TOC. Press any key when TOC is active to start searching.':'Enable quick search functionality in floating TOC. Press any key when TOC is active to start searching.',
     'Plugin Style Settings': 'Plugin Style Settings',
     'Mobile enabled or not':'Mobile enabled or not',
     'Whether to enable the plugin for the mobile client, the default is enabled.':'Whether to enable the plugin for the mobile client, the default is enabled.',
@@ -36,5 +38,16 @@ export default {
     'Show heading text next to indicator bar': 'Show heading text next to indicator bar',
     'When enabled, heading text will be shown next to the indicator bar': 'When enabled, heading text will be shown next to the indicator bar',
     'More Style Settings': 'More Style Settings',
-    'Notice: Please click the button again,If the floating-toc option is not found in the style settings': 'Notice: Please click the button again,If the floating-toc option is not found in the style settings'
+    'Notice: Please click the button again,If the floating-toc option is not found in the style settings': 'Notice: Please click the button again,If the floating-toc option is not found in the style settings',
+    // Search functionality translations
+    'Search in TOC ': 'Search in TOC ',
+    'Search in Floating TOC': 'Search in Floating TOC',
+    'Search': 'Search',
+    'Search title... ': 'Search TOC title... ',
+    'Search results': 'Search results',
+    'No results found': 'No results found',
+    'Press Enter to jump to selected title': 'Press Enter to jump to selected title',
+    'Press Escape to cancel search': 'Press Escape to cancel search',
+    'Use arrow keys to navigate results': 'Use arrow keys to navigate results',
+    'Close search': 'Close search'
 };

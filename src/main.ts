@@ -11,6 +11,7 @@ import { creatToc, createLi, createToolbar } from "src/components/floatingtocUI"
 import { FlotingTOCSettingTab } from "src/settings/settingsTab";
 import { FlotingTOCSetting, DEFAULT_SETTINGS } from "src/settings/settingsData";
 import {  hasChildHeading } from "src/components/toggleCollapse";
+import { FloatingTocSearch } from "src/components/search";
 
 let activeDocument: Document;
 let line = 0;
@@ -221,6 +222,7 @@ export default class FloatingToc extends Plugin {
     private lastRefreshTime = 0;
     private readonly REFRESH_COOLDOWN = 200; // 刷新冷却时间
     private currentFile: string | null = null;
+    public search: FloatingTocSearch;
 	public  BAR_STYLE_CLASSES = [
 		"enable-bar-heading-text",
 		"enable-heading-nowrap",
@@ -240,6 +242,10 @@ export default class FloatingToc extends Plugin {
 			? (activeDocument = activeWindow.document)
 			: (activeDocument = window.document);
 		await this.loadSettings();
+		
+		// 初始化搜索功能
+		this.search = new FloatingTocSearch(this);
+		
 		const updateHeadingsForView = (view: MarkdownView) => {
 			view
 				? refresh_node(this, view)
@@ -338,6 +344,19 @@ export default class FloatingToc extends Plugin {
 				}
 				this.saveSettings();
 				dispatchEvent(new Event("refresh-toc"))
+			},
+		});
+
+		// 添加搜索快捷键命令
+		this.addCommand({
+			id: "search-in-toc",
+			name: "Search in Floating TOC",
+			icon: "search",
+			hotkeys: [{ modifiers: ["Alt"], key: "F" }],
+			callback: () => {
+				if (this.search) {
+					this.search.startSearchFromButton();
+				}
 			},
 		});
  
