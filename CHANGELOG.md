@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.7.0 (2025-07-11)
+### #142 #135  fixed
+ Supports title search. Default shortcut key `alt+f` activates.
+### #140 #142 fixed
+增加一个选项    可以设置 指示条旁边显示标题的背景色
+### fix: 修复嵌入笔记右侧留空问题
+#139
+### Update manifest.json and CHANGELOG.md for version 2.6.5
+
+
 ## 2.6.5 (2025-04-01)
 ### #133 fixed
 ### Update manifest.json and CHANGELOG.md for version 2.6.4
