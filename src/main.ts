@@ -1,3 +1,4 @@
+// pattern: Mixed (needs refactoring)
 import {
 	debounce,
 	Notice,
@@ -248,6 +249,7 @@ export default class FloatingToc extends Plugin {
 		this.search = new FloatingTocSearch(this);
 		
 		const updateHeadingsForView = (view: MarkdownView) => {
+			this.currentFile = view?.file?.path ?? null;
 			view
 				? refresh_node(this, view)
 					? false
@@ -368,7 +370,7 @@ export default class FloatingToc extends Plugin {
 				if (!view) return;
 
 				const newFile = view.file?.path;
-				if (newFile === this.currentFile) return; // 如果是同一个文件，跳过
+				if (newFile === this.currentFile && view.contentEl.querySelector(".floating-toc-div")) return;
 
 				this.currentFile = newFile;
 				const current_file = this.app.workspace.getActiveFile();
@@ -407,9 +409,9 @@ export default class FloatingToc extends Plugin {
 				)
 				); */
 				this.registerEvent(
-					this.app.metadataCache.on("changed", () => {
+					this.app.metadataCache.on("changed", (file) => {
 						const view = this.app.workspace.getActiveViewOfType(MarkdownView);
-						if (!view || view.file?.path !== this.currentFile) return;
+						if (!view || view.file !== file || view.file?.path !== this.currentFile) return;
 			
 						const current_file = view.file;
 						
@@ -471,7 +473,7 @@ export default class FloatingToc extends Plugin {
 	
 		 
 
-		activeDocument.addEventListener(
+		this.registerDomEvent(activeDocument,
 			"scroll",
 			(event) => {
 				this.handleScroll(this.app, this, event);
@@ -480,16 +482,16 @@ export default class FloatingToc extends Plugin {
 		);
 		this.addSettingTab(new FlotingTOCSettingTab(this.app, this));
 
-		this.app.workspace.on("window-open", (leaf) => {
+		this.registerEvent(this.app.workspace.on("window-open", (leaf) => {
 			console.log("window-open")
-			leaf.doc.addEventListener(
+			this.registerDomEvent(leaf.doc,
 				"scroll",
 				(event) => {
 					this.handleScroll(this.app, this, event);
 				},
 				true
 			);
-		});
+		}));
 
 
 		this.app.workspace.onLayoutReady(() => {
@@ -641,19 +643,6 @@ export default class FloatingToc extends Plugin {
 		requireApiVersion("0.15.0")
 			? (activeDocument = activeWindow.document)
 			: (activeDocument = window.document);
-		
-		// 清理滚动事件监听器
-		try {
-			activeDocument.removeEventListener(
-				"scroll",
-				(event) => {
-					this.handleScroll(this.app, this, event);
-				},
-				true
-			);
-		} catch (e) {
-			console.error("Error removing scroll event listener:", e);
-		}
 		
 		// 清理虚拟列表和其他资源
 		try {

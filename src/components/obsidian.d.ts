@@ -1,5 +1,10 @@
 import "obsidian";
 
+declare global {
+  interface WindowEventMap {
+    "refresh-toc": Event;
+  }
+}
 
  
 
@@ -30,7 +35,7 @@ declare module "obsidian" {
 
 interface Plugins {
   manifests: Record<string, PluginManifest>;
-  plugins: Record<string, Plugin_2>;
+  plugins: Record<string, Plugin>;
   enabledPlugins:any;
   enablePlugin(pluginId: string): Promise<boolean>;
   disblePlugin(pluginId: string): Promise<void>;
@@ -53,6 +58,10 @@ interface Commands {
     applyFoldInfo(foldInfo: FoldInfo): void;
     getFoldInfo(): FoldInfo | null;
   }
+
+  // These internal methods exist on both concrete subviews as well.
+  interface MarkdownEditView extends MarkdownSubView {}
+  interface MarkdownPreviewView extends MarkdownSubView {}
 
   interface Editor {
     cm: CodeMirror.Editor;

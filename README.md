@@ -15,6 +15,20 @@ Thanks to the [floating-toc](https://github.com/curtgrimes/obsidian-floating-toc
 
 Please Refer: [How to install Obsidian Plugins](https://forum.obsidian.md/t/plugins-mini-faq/7737)
 
+## Building and testing locally
+
+Run `npm ci` and `npm run build`. Copy **all three** files from `build/`
+(`main.js`, `manifest.json`, and `styles.css`) into
+`<vault>/.obsidian/plugins/floating-toc/`, then enable or reload **floating toc**
+in Obsidian's community plugin settings. Copying the repository or only
+`main.js` does not provide a complete installation.
+
+With the built plugin installed and enabled, `npm run test:obsidian` runs a
+smoke test using Obsidian's CLI. It creates temporary notes and tabs in the
+active vault, checks reload/edit updates, duplicate tabs and reading mode,
+then deletes its test notes and restores the original tab. Set `OBSIDIAN_CLI`
+to the executable path if `obsidian` is not on your PATH.
+
 ## Video Introduction
 
 [About Floating TOC](https://www.bilibili.com/video/BV1Ze4y1C7Yw/)

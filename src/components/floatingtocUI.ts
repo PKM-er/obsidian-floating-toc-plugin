@@ -1,3 +1,4 @@
+// pattern: Mixed (needs refactoring)
 import type FloatingToc from "src/main";
 import {
     App,
@@ -248,7 +249,7 @@ export function creatToc(app: App, plugin: FloatingToc): void {
     ) => {
         const current_file = app.workspace.getActiveFile();
 
-        let heading = app.metadataCache.getFileCache(current_file).headings;
+        let heading = current_file ? app.metadataCache.getFileCache(current_file)?.headings : undefined;
         let cleanheading: HeadingCache[] = [];
         heading?.map((item: HeadingCache) => {
             item.heading = item.heading.replace(/<\/?[\s\S]*?(?:".*")*>/g, ""); // clean html tags
@@ -376,7 +377,7 @@ export function creatToc(app: App, plugin: FloatingToc): void {
                 ?.querySelector(".markdown-reading-view")
                 ?.insertAdjacentElement("beforebegin", floatingTocWrapper);
     };
-    let Markdown = this.app.workspace.getActiveViewOfType(MarkdownView);
+    let Markdown = app.workspace.getActiveViewOfType(MarkdownView);
     if (Markdown) {
         requireApiVersion("0.15.0")
             ? (activeDocument = activeWindow.document)

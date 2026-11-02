@@ -5,7 +5,8 @@
 	"main": "src/main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
-		"build": "node esbuild.config.mjs production"
+		"build": "node esbuild.config.mjs production",
+		"test:obsidian": "node tests/obsidian-smoke.cjs"
 	},
 	"keywords": [],
 	"author": "Curt Grimes",
