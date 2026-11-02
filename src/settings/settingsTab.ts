@@ -1,3 +1,4 @@
+// pattern: Imperative Shell
 import type FloatingToc from "src/main";
 import { App, Setting, PluginSettingTab, ButtonComponent } from "obsidian";
 import { POSITION_STYLES } from "src/settings/settingsData";
@@ -13,7 +14,7 @@ export class FlotingTOCSettingTab extends PluginSettingTab {
   constructor(app: App, plugin: FloatingToc) {
     super(app, plugin);
     this.plugin = plugin;
-    addEventListener("refresh-toc", () => {
+    plugin.registerDomEvent(window, "refresh-toc", () => {
       selfDestruct();
       creatToc(app, this.plugin);
     });

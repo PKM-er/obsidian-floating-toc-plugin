@@ -12,9 +12,12 @@ const banner =
 
 const prod = (process.argv[2] === 'production');
 
-// Obsidian requires that the style file is called styles.css
-//const renameCSSFile = () => fs.rename('./build/main.css', './build/styles.css', () => { });
-const copyjsonFile = () => fs.copyFile('./manifest.json', './build/manifest.json', () => { });
+// Keep the build directory ready to install, including Obsidian's required CSS.
+const copyPluginAssets = () => {
+	for (const file of ['manifest.json', 'styles.css']) {
+		fs.copyFileSync(file, `./build/${file}`);
+	}
+};
 try {
 	await esbuild.build({
 		banner: {
@@ -50,7 +53,9 @@ try {
 			...builtins],
 		format: 'cjs',
 		watch: prod ? false : {
-			onRebuild: copyjsonFile
+			onRebuild(error) {
+				if (!error) copyPluginAssets();
+			}
 		},
 		target: 'es2016',
 		logLevel: "info",
@@ -60,8 +65,7 @@ try {
 		outfile: './build/main.js', // Utilizes the hot-reload plugin for dynamic reloading. See https://github.com/pjeby/hot-reload for details.
 
 	});
-	//renameCSSFile();
-	copyjsonFile();
+	copyPluginAssets();
 }
 catch (e) {
 	console.error(e);
